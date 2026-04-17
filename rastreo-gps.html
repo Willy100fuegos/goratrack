@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GORATRACK | Rastreo GPS y Control de Flotas en Tiempo Real</title>
+
+  <meta name="description"
+    content="Hemos impulsado la innovación, rentabilidad y seguridad de decenas de miles de activos de múltiples industrias. GORATRACK es el proveedor de rastreo satelital por elección." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png"
+    href="https://static.readdy.ai/image/fed6b371770be9defbe288b77a595288/68da367dfcc11d1102ec162196b95b68.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#11151C',
+              gold: '#DDA727',
+              goldHover: '#c9941f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center cursor-pointer">
+        <div class="bg-white p-1.5 rounded-md flex items-center justify-center">
+          <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas Logo"
+            class="h-8 w-auto object-contain" />
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Inicio
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Nosotros
+        </a>
+        <div class="relative group">
+          <button
+            class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-brand-gold flex items-center gap-1">
+            Soluciones <i class="ri-arrow-down-s-line"></i>
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-gold rounded-full"></span>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-64 bg-brand-dark border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50 py-2">
+            <a href="rastreo-gps.html"
+              class="px-4 py-2 text-sm text-brand-gold hover:bg-white/5 transition-colors font-bold">Rastreo GPS</a>
+            <a href="radiocomunicacion.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Radiocomunicación
+              encriptada</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Plataformas inteligentes</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Integración tecnológica</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Analítica operativa</a>
+          </div>
+        </div>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Industrias
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Contacto
+        </a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden md:flex items-center">
+        <a href="index.html"
+          class="bg-brand-gold text-brand-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-brand-goldHover transition-colors duration-200 cursor-pointer whitespace-nowrap">
+          Solicitar cotización
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="md:hidden text-white cursor-pointer"
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');"
+        aria-label="Toggle menu">
+        <i class="ri-menu-line text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-brand-dark border-t border-white/10 px-6 py-4 flex-col gap-4 overflow-y-auto max-h-screen">
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Inicio</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Nosotros</a>
+      <div class="flex flex-col gap-2">
+        <span class="text-left text-sm font-medium tracking-wide whitespace-nowrap text-brand-gold">Soluciones</span>
+        <div class="pl-4 flex flex-col gap-3 mt-1">
+          <a href="rastreo-gps.html" class="text-left text-sm font-bold text-brand-gold">Rastreo GPS</a>
+          <a href="radiocomunicacion.html"
+            class="text-left text-sm text-gray-400 hover:text-brand-gold">Radiocomunicación encriptada</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Plataformas inteligentes</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Integración tecnológica</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Analítica operativa</a>
+        </div>
+      </div>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Industrias</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Contacto</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- 1. HERO SECTION WITH YOUTUBE BACKGROUND -->
+    <section class="relative w-full h-screen overflow-hidden bg-black">
+      <!-- YouTube Video Background -->
+      <!-- Usa un aspect-ratio hack para llenar la pantalla -->
+      <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0 opacity-60">
+        <iframe
+          class="w-screen h-[100vw] sm:h-[56.25vw] min-h-screen min-w-[177.77vh] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          src="https://www.youtube.com/embed/j3jwfNW5G0I?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=j3jwfNW5G0I&playsinline=1"
+          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Gradient Overlay para legibilidad -->
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-transparent z-10"></div>
+
+      <!-- Content -->
+      <div class="relative z-20 max-w-7xl mx-auto px-6 h-full flex flex-col justify-center">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-0.5 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Soluciones Especializadas</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+            Rastreo y control de la operación en <span class="text-brand-gold">tiempo real</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            Hemos impulsado la innovación, rentabilidad y seguridad de decenas de miles de activos de múltiples
+            industrias. GORATRACK es el proveedor de rastreo satelital por elección.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#beneficios"
+              class="bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-full hover:bg-brand-goldHover transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+              Descubrir funciones <i class="ri-arrow-down-line"></i>
+            </a>
+            <a href="index.html"
+              class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+              Hablar con un experto <i class="ri-whatsapp-line text-xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROPUESTA DE VALOR / BENEFICIOS (ZIG-ZAG) -->
+    <section id="beneficios" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+          <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4">La evolución de la gestión logística</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto text-lg">Durante más de una década hemos impulsado los beneficios
+            del control y administración eficiente de los activos a través de herramientas poderosas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <!-- Item 1 -->
+          <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-shadow group">
+            <div
+              class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-dashboard-2-line"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brand-dark mb-3">Administración eficiente de flota</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">
+              Módulos diseñados para mantener al día la administración y gestión de sus activos, reduciendo tiempos
+              muertos y optimizando recursos operativos.
+            </p>
+          </div>
+          <!-- Item 2 -->
+          <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-shadow group">
+            <div
+              class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-route-line"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brand-dark mb-3">Supervisión de trabajos</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">
+              Simplificamos su operación. Herramientas diseñadas para un flujo de trabajo automatizado, control de
+              consumo de combustible y prevención de desgaste de unidad.
+            </p>
+          </div>
+          <!-- Item 3 -->
+          <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-shadow group">
+            <div
+              class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-bar-chart-box-line"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brand-dark mb-3">Análisis y mejora continua</h3>
+            <p class="text-gray-600 leading-relaxed text-sm">
+              Reportes personalizados a la información que desea saber de forma precisa y automatizada. Áreas de
+              oportunidad a su disposición.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FUNCIONALIDADES DETALLADAS (DARK GRID) -->
+    <section class="py-24 bg-brand-dark text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div class="max-w-2xl">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-8 h-0.5 bg-brand-gold"></div>
+              <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Ecosistema GORATRACK</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">Herramientas que marcan la diferencia</h2>
+            <p class="text-gray-400">Plataformas modulares adaptadas al nivel de complejidad de tu operación diaria.</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          <!-- Columna: Seguridad -->
+          <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <div class="flex items-center gap-4 mb-8 pb-4 border-b border-white/10">
+              <i class="ri-shield-star-fill text-4xl text-brand-gold"></i>
+              <h3 class="text-2xl font-bold tracking-wide">SEGURIDAD</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3"><i class="ri-radar-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Detección de Jammer</span></li>
+              <li class="flex items-start gap-3"><i class="ri-truck-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Seguridad al Transporte de Carga</span></li>
+              <li class="flex items-start gap-3"><i class="ri-user-star-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Monitoreo VIP de personas</span></li>
+              <li class="flex items-start gap-3"><i class="ri-alarm-warning-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Sirena en Cabina</span></li>
+              <li class="flex items-start gap-3"><i class="ri-satellite-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Rastreo Satelital Puro</span></li>
+              <li class="flex items-start gap-3"><i class="ri-lock-2-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Blindaje Digital y Anti sabotaje</span></li>
+              <li class="flex items-start gap-3"><i class="ri-door-lock-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Chapa Electromecánica</span></li>
+              <li class="flex items-start gap-3"><i class="ri-sensor-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Sensor de Apertura de Puertas</span></li>
+              <li class="flex items-start gap-3"><i class="ri-robot-2-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Sistema de Monitoreo Robotizado</span></li>
+              <li class="flex items-start gap-3"><i class="ri-link-m text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Detección de Enganche (5ta Rueda)</span></li>
+            </ul>
+          </div>
+
+          <!-- Columna: Control y Administración -->
+          <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <div class="flex items-center gap-4 mb-8 pb-4 border-b border-white/10">
+              <i class="ri-settings-4-fill text-4xl text-brand-gold"></i>
+              <h3 class="text-2xl font-bold tracking-wide leading-tight">CONTROL Y ADMINISTRACIÓN</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3"><i class="ri-gas-station-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Monitoreo de Combustible</span></li>
+              <li class="flex items-start gap-3"><i class="ri-cpu-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Telemetría Avanzada</span></li>
+              <li class="flex items-start gap-3"><i class="ri-temp-hot-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Monitoreo de Temperatura de Carga</span></li>
+              <li class="flex items-start gap-3"><i class="ri-id-card-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Identificador de Conductor</span></li>
+              <li class="flex items-start gap-3"><i class="ri-door-open-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Apertura y Cierre de Compuertas</span></li>
+              <li class="flex items-start gap-3"><i class="ri-lightbulb-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Monitoreo de Luz en Carga</span></li>
+              <li class="flex items-start gap-3"><i class="ri-mic-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Kit de comunicación en unidades</span></li>
+              <li class="flex items-start gap-3"><i class="ri-group-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Identificador de Pasajeros a Bordo</span></li>
+              <li class="flex items-start gap-3"><i class="ri-plug-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Integrador de Plataformas / WebService</span></li>
+            </ul>
+          </div>
+
+          <!-- Columna: Prevención -->
+          <div class="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <div class="flex items-center gap-4 mb-8 pb-4 border-b border-white/10">
+              <i class="ri-eye-fill text-4xl text-brand-gold"></i>
+              <h3 class="text-2xl font-bold tracking-wide leading-tight">PREVENCIÓN DE ACCIDENTES</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3"><i class="ri-vidicon-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Videovigilancia Vehicular</span></li>
+              <li class="flex items-start gap-3"><i class="ri-user-scan-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Cipia DMS (Monitoreo del Conductor)</span></li>
+              <li class="flex items-start gap-3"><i class="ri-car-washing-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Prevención y detección de accidentes (ADAS)</span></li>
+              <li class="flex items-start gap-3"><i class="ri-speed-up-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">Gobernador de velocidad por GPS</span></li>
+              <li class="flex items-start gap-3"><i class="ri-cloud-windy-line text-brand-gold mt-1"></i> <span
+                  class="text-gray-300">SIGFOX Recuperación de Carga</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SECTORES (GRID) -->
+    <section class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-brand-dark">Protección para todas las industrias</h2>
+          <div class="w-16 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <!-- Array of Sectors -->
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-truck-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Transporte de carga</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-caravan-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Vehículos utilitarios</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-roadster-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Maquinaria pesada</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-motorbike-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Autos y Motos</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-government-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Fuerzas del orden</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-bus-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Transporte de personas</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-store-2-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Arrendadoras / Agencias</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-shield-check-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Aseguradoras</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-walk-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Personal de campo</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-box-3-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Activos y mercancía</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-vip-diamond-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Vehículos de lujo</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-caravan-fill text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Remolques y cajas</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-parent-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Familia y adolescentes</h4>
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm text-center border border-gray-100 hover:border-brand-gold hover:-translate-y-1 transition-all">
+            <i class="ri-battery-charge-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-semibold text-gray-700">Generadores de Carga</h4>
+          </div>
+          <div
+            class="bg-brand-gold p-4 rounded-xl shadow-md text-center flex flex-col justify-center items-center cursor-pointer hover:bg-brand-goldHover transition-colors">
+            <i class="ri-add-circle-line text-3xl text-brand-dark mb-2"></i>
+            <h4 class="text-sm font-bold text-brand-dark">Y mucho más...</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PROMESAS Y GARANTÍAS (Prepárate para el futuro) -->
+    <section class="py-24 bg-white border-t border-gray-100">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black text-brand-dark mb-4 uppercase">Prepárate para el futuro con <span
+              class="text-brand-gold">GORATRACK</span></h2>
+          <p class="text-xl text-gray-500">Respaldamos tu inversión con compromisos reales, no solo palabras.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-file-close-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">No plazo forzoso</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">En ninguno de nuestros planes hacemos contrato forzoso.
+                Si no está satisfecho puede cancelar de inmediato. ¡Todos los meses demostramos ser el mejor!</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-code-s-slash-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">Plataforma Propia</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Permanente desarrollo tecnológico. Somos dueños de
+                nuestra plataforma GPS, lo que nos permite adaptar y desarrollar requerimientos específicos.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-customer-service-2-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">Central de monitoreo 24/7</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Respaldo y reacción inmediata. Coordinamos a nivel
+                nacional con las autoridades en la recuperación y resguardo en caso de emergencia/robo.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-server-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">Infraestructura Mundial</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Tres centros de datos alojados en el extranjero con
+                disponibilidad del 99.9%, redundancia y seguridad. La plataforma más estable del mercado.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-earth-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">Cobertura Internacional</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">La empresa con mayor cobertura de servicios técnicos con
+                profesionales certificados en todo el territorio Mexicano, Centroamérica y E.U.A.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <div class="mt-1 text-brand-gold text-2xl"><i class="ri-money-dollar-circle-line"></i></div>
+            <div>
+              <h4 class="font-bold text-lg text-brand-dark mb-2">Flexibilidad Financiera</h4>
+              <p class="text-sm text-gray-600 leading-relaxed">Financiamiento, venta, renta y homologación de sus GPS a
+                nuestro servicio. Planes acordes a su requerimiento y presupuesto.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Banner de Certificación -->
+        <div
+          class="mt-16 bg-gradient-to-r from-brand-dark to-[#1e2531] rounded-2xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between">
+          <div class="mb-6 md:mb-0">
+            <h3 class="text-2xl font-bold text-white mb-2">Garantía de Satisfacción por Escrito</h3>
+            <p class="text-gray-400">Consultoría experta, pronta recuperación de inversión y garantía de localizadores
+              GPS hasta de por vida.</p>
+          </div>
+          <a href="index.html"
+            class="bg-brand-gold text-brand-dark font-bold px-8 py-3 rounded-full hover:bg-brand-goldHover transition-colors whitespace-nowrap">
+            Solicitar Asesoría
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. APP MÓVIL Y DESCARGA -->
+    <section class="py-24 bg-[#f8f9fa] overflow-hidden">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+
+          <div class="lg:w-1/2">
+            <div
+              class="inline-block bg-brand-gold/10 text-brand-gold font-bold px-4 py-1.5 rounded-full text-sm mb-6 uppercase tracking-wider">
+              Control en tu bolsillo
+            </div>
+            <h2 class="text-4xl md:text-5xl font-black text-brand-dark mb-6 leading-tight">
+              DESCARGA NUESTRA APLICACIÓN
+            </h2>
+            <p class="text-xl text-gray-600 mb-8">
+              Mantén el control de tu flota 24/7 desde la palma de tu mano. Aplicaciones, notificaciones y alertas
+              empoderadas con nuestra tecnología de rastreo satelital.
+            </p>
+
+            <div class="flex gap-4 mb-10">
+              <img src="http://imgfz.com/i/eTqxr10.png" alt="Descargar en App Store"
+                class="h-12 cursor-pointer hover:scale-105 transition-transform" />
+              <img src="http://imgfz.com/i/hcAdwQX.png" alt="Disponible en Google Play"
+                class="h-12 cursor-pointer hover:scale-105 transition-transform" />
+            </div>
+
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3 text-gray-700 font-medium"><i
+                  class="ri-check-line text-green-500 text-xl"></i> Monitoreo en tiempo real</li>
+              <li class="flex items-center gap-3 text-gray-700 font-medium"><i
+                  class="ri-check-line text-green-500 text-xl"></i> Paro de motor desde la App</li>
+              <li class="flex items-center gap-3 text-gray-700 font-medium"><i
+                  class="ri-check-line text-green-500 text-xl"></i> Notificaciones push instantáneas</li>
+            </ul>
+          </div>
+
+          <div class="lg:w-1/2 relative">
+            <!-- Imagen Principal App -->
+            <img src="http://imgfz.com/i/m3srGjR.png" alt="GORATRACK App Móvil"
+              class="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl animate-[bounce_4s_infinite]" />
+
+            <!-- Decoraciones CSS -->
+            <div
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-gold/20 rounded-full blur-3xl z-0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="lg:col-span-2">
+          <div class="inline-block bg-white p-2 rounded-md mb-5">
+            <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas"
+              class="h-10 w-auto object-contain" />
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+            GORATRACK Sistemas ofrece soluciones de tecnología satelital, rastreo GPS,
+            radiocomunicación encriptada y plataformas inteligentes de gestión operativa
+            para empresas que requieren control, trazabilidad y capacidad de respuesta en tiempo real.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Navegación</h5>
+          <ul class="space-y-3">
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Inicio</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Nosotros</a></li>
+            <li><a href="#"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Soluciones</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Industrias</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Soluciones</h5>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Rastreo GPS</a></li>
+            <li><a href="radiocomunicacion.html"
+                class="text-gray-400 text-sm hover:text-white transition-colors">Radiocomunicación</a></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Plataformas inteligentes</span></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Integración tecnológica</span></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Analítica operativa</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-500 text-xs">&copy; 2026 GORATRACK Sistemas. Todos los derechos reservados.</p>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-500 text-xs">Tecnología satelital &bull; Rastreo GPS &bull; Radiocomunicación
+              encriptada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

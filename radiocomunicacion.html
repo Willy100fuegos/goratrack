@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GORATRACK | Radiocomunicación Encriptada PTT</title>
+
+  <meta name="description"
+    content="Goratrack PTT ofrece comunicaciones Push-to-Talk sobre redes celulares. Ubicación en tiempo real, comunicación instantánea y control total de su operación." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png"
+    href="https://static.readdy.ai/image/fed6b371770be9defbe288b77a595288/68da367dfcc11d1102ec162196b95b68.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#11151C',
+              gold: '#DDA727',
+              goldHover: '#c9941f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center cursor-pointer">
+        <div class="bg-white p-1.5 rounded-md flex items-center justify-center">
+          <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas Logo"
+            class="h-8 w-auto object-contain" />
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Inicio
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Nosotros
+        </a>
+        <div class="relative group">
+          <button
+            class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-brand-gold flex items-center gap-1">
+            Soluciones <i class="ri-arrow-down-s-line"></i>
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-gold rounded-full"></span>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-64 bg-brand-dark border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50 py-2">
+            <a href="rastreo-gps.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Rastreo
+              GPS</a>
+            <a href="radiocomunicacion.html"
+              class="px-4 py-2 text-sm text-brand-gold hover:bg-white/5 transition-colors font-bold">Radiocomunicación
+              encriptada</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Plataformas inteligentes</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Integración tecnológica</a>
+            <a href="#" class="px-4 py-2 text-sm text-gray-400 cursor-not-allowed">Analítica operativa</a>
+          </div>
+        </div>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Industrias
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Contacto
+        </a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden md:flex items-center">
+        <a href="index.html"
+          class="bg-brand-gold text-brand-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-brand-goldHover transition-colors duration-200 cursor-pointer whitespace-nowrap">
+          Solicitar cotización
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="md:hidden text-white cursor-pointer"
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');"
+        aria-label="Toggle menu">
+        <i class="ri-menu-line text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-brand-dark border-t border-white/10 px-6 py-4 flex-col gap-4 overflow-y-auto max-h-screen">
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Inicio</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Nosotros</a>
+      <div class="flex flex-col gap-2">
+        <span class="text-left text-sm font-medium tracking-wide whitespace-nowrap text-brand-gold">Soluciones</span>
+        <div class="pl-4 flex flex-col gap-3 mt-1">
+          <a href="rastreo-gps.html" class="text-left text-sm text-gray-400 hover:text-brand-gold">Rastreo GPS</a>
+          <a href="radiocomunicacion.html" class="text-left text-sm font-bold text-brand-gold">Radiocomunicación
+            encriptada</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Plataformas inteligentes</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Integración tecnológica</a>
+          <a href="#" class="text-left text-sm text-gray-500 cursor-not-allowed">Analítica operativa</a>
+        </div>
+      </div>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Industrias</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Contacto</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative w-full h-screen overflow-hidden bg-black flex items-center">
+      <!-- Background Image -->
+      <div class="absolute inset-0 w-full h-full z-0 opacity-60 bg-cover bg-center"
+        style="background-image: url('http://imgfz.com/i/vNuLhdZ.png');">
+      </div>
+
+      <!-- Gradient Overlay para legibilidad -->
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent z-10"></div>
+
+      <!-- Content -->
+      <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-0.5 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Soluciones Especializadas</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+            Comunicaciones <span class="text-brand-gold">Seguras e Instantáneas</span> en Cualquier Lugar
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            Goratrack PTT garantiza comunicaciones grupales sin límites, conectando a tu equipo de trabajo en tiempo
+            real con tecnología Push-to-Talk y datos multimedia avanzados.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#solucion"
+              class="bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-full hover:bg-brand-goldHover transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+              Conocer Goratrack PTT <i class="ri-arrow-down-line"></i>
+            </a>
+            <a href="index.html"
+              class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+              Hablar con un experto <i class="ri-whatsapp-line text-xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. QUE SIGNIFICA PoC -->
+    <section id="solucion" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-16 items-center">
+          <div class="lg:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">¿Qué es el PoC de <span
+                class="text-brand-gold">Goratrack</span>?</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6">
+              <strong>PoC</strong> significa comunicaciones PTT sobre la red celular o "Push-to-talk over Cellular". Los
+              radios admiten un chip celular que les permite realizar llamadas y utilizar datos de internet.
+            </p>
+            <p class="text-gray-600 text-lg leading-relaxed mb-8">
+              La Solución PoC de Goratrack garantiza comunicaciones grupales sin límites en sistemas LTE y WLAN para
+              crear amplias redes de radios que aprovechan la infraestructura celular de banda ancha de manera segura y
+              encriptada.
+            </p>
+          </div>
+          <div class="lg:w-1/2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center">
+                <i class="ri-global-line text-4xl text-brand-gold mb-4"></i>
+                <h4 class="font-bold text-brand-dark mb-2">Sin Límites Geográficos</h4>
+                <p class="text-sm text-gray-500">Cobertura total utilizando redes celulares 3G/4G/LTE/Wi-Fi.</p>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col items-center text-center">
+                <i class="ri-sim-card-2-line text-4xl text-brand-gold mb-4"></i>
+                <h4 class="font-bold text-brand-dark mb-2">Red Celular + PTT</h4>
+                <p class="text-sm text-gray-500">El poder del teléfono y la inmediatez de la radio en un solo
+                  dispositivo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. COORDINACION Y CONTROL HYTALK REBRANDED -->
+    <section class="py-24 bg-brand-dark text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-bold mb-6">Coordinación Inteligente en <span
+              class="text-brand-gold">Tiempo Real</span></h2>
+          <p class="text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed">
+            Con la plataforma Goratrack PTT, toma el control total de tus operaciones desde una potente aplicación de
+            despacho diseñada para maximizar la eficiencia y la seguridad de tu equipo. Al integrarse perfectamente con
+            radios PoC y bodycams, esta solución te permite localizar, comunicar y tomar decisiones críticas en
+            segundos.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 text-center">
+          <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <i class="ri-map-pin-user-line text-5xl text-brand-gold mb-6 block"></i>
+            <h3 class="text-xl font-bold mb-3">Ubicación Precisa</h3>
+            <p class="text-gray-400 text-sm">Supervisa a tu personal en terreno gracias al rastreo GPS preciso integrado
+              en todos los dispositivos.</p>
+          </div>
+          <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <i class="ri-mic-line text-5xl text-brand-gold mb-6 block"></i>
+            <h3 class="text-xl font-bold mb-3">Comunicación Instantánea</h3>
+            <p class="text-gray-400 text-sm">Lanza llamadas grupales o individuales al instante con solo presionar el
+              botón PTT.</p>
+          </div>
+          <div class="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-colors">
+            <i class="ri-video-chat-line text-5xl text-brand-gold mb-6 block"></i>
+            <h3 class="text-xl font-bold mb-3">Transmisión Multimedia</h3>
+            <p class="text-gray-400 text-sm">Comparte datos, voz, imágenes y video en tiempo real para una toma de
+              decisiones más rápida y acertada.</p>
+          </div>
+        </div>
+
+        <!-- Goratrack Center -->
+        <div
+          class="bg-gradient-to-br from-brand-dark to-slate-900 border border-brand-gold/20 rounded-3xl p-10 md:p-14 shadow-2xl">
+          <div class="flex flex-col md:flex-row gap-12 items-center">
+            <div class="md:w-1/2">
+              <h3 class="text-2xl md:text-3xl font-bold mb-4">Control Total con el Centro de Comando <span
+                  class="text-brand-gold">Goratrack PTT</span></h3>
+              <p class="text-gray-400 leading-relaxed mb-6">
+                El despachador Goratrack PTT es mucho más que una solución de radio: es tu centro de comando integral.
+                Con esta plataforma todo-en-uno, puedes gestionar dispositivos, comunicaciones y personal desde un solo
+                lugar, con total seguridad y eficiencia.
+              </p>
+              <ul class="space-y-4">
+                <li class="flex items-center gap-3"><i class="ri-check-line text-brand-gold"></i> <span
+                    class="text-gray-300">Supervisar y rastrear tu flota en tiempo real (Radios y Bodycams).</span></li>
+                <li class="flex items-center gap-3"><i class="ri-check-line text-brand-gold"></i> <span
+                    class="text-gray-300">Generar reportes automáticos para análisis.</span></li>
+                <li class="flex items-center gap-3"><i class="ri-check-line text-brand-gold"></i> <span
+                    class="text-gray-300">Centralizar comunicaciones en una plataforma de alta seguridad.</span></li>
+              </ul>
+            </div>
+            <div class="md:w-1/2 text-center">
+              <i
+                class="ri-macbook-line text-9xl text-brand-gold/80 hover:text-brand-gold transition-colors duration-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CASOS DE USO / DONDE USAR -->
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-brand-dark mb-4">Dónde usar nuestra tecnología PoC</h2>
+          <p class="text-gray-500 max-w-2xl mx-auto">Nuestra solución se adapta a los requerimientos más estrictos de
+            distintas industrias, eliminando las fronteras de comunicación.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+          <!-- Sector Seguridad -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all group">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-brand-gold/10 rounded-xl flex items-center justify-center group-hover:bg-brand-gold transition-colors duration-300">
+                <i class="ri-shield-user-line text-3xl text-brand-gold group-hover:text-brand-dark"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-brand-dark">Sector Seguridad</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+              PoC es una herramienta ideal para empresas de seguridad que requieren reforzar su operación. Sustituye la
+              mezcla de celulares y radios LMR tradicionales sin tener que invertir en mayor infraestructura.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">1.</span> <span
+                  class="text-xs text-gray-600">Comunicación instantánea para reportar situaciones anormales.</span>
+              </li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">2.</span> <span
+                  class="text-xs text-gray-600">Cobertura de todos los puntos de vigilancia por redes públicas.</span>
+              </li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">3.</span> <span
+                  class="text-xs text-gray-600">Excelente duración de batería y uso de linterna en rondas.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">4.</span> <span
+                  class="text-xs text-gray-600">Voz clara para atender novedades aún en lugares con ruido.</span></li>
+            </ul>
+          </div>
+
+          <!-- Sector Logístico -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all group">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-brand-gold/10 rounded-xl flex items-center justify-center group-hover:bg-brand-gold transition-colors duration-300">
+                <i class="ri-truck-line text-3xl text-brand-gold group-hover:text-brand-dark"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-brand-dark">Sector Logístico</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+              Ideal para operaciones dispersas o flotas amplias. Las compañías de logística pueden comunicarse sin
+              invertir capital en infraestructura para redes de área amplia (LMR).
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">1.</span> <span
+                  class="text-xs text-gray-600">Comunicación versátil PTT o con el usuario vía red celular.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">2.</span> <span
+                  class="text-xs text-gray-600">Monitoreo GPS en plataforma para control de repartidores.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">3.</span> <span
+                  class="text-xs text-gray-600">Resistente a la dinámica diaria y manipulación de carga.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">4.</span> <span
+                  class="text-xs text-gray-600">Transferencia de imágenes para notificar entregas con evidencia.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Sector Industria y Comercio -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all group">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-brand-gold/10 rounded-xl flex items-center justify-center group-hover:bg-brand-gold transition-colors duration-300">
+                <i class="ri-store-2-line text-3xl text-brand-gold group-hover:text-brand-dark"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-brand-dark">Industria y Comercio</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+              Perfecto para puntos de venta minorista o fábricas con múltiples sucursales que requieren coordinación
+              entre sí y no desean costear infraestructura de radiocomunicación.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">1.</span> <span
+                  class="text-xs text-gray-600">Aplicaciones Android para revisión de inventarios.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">2.</span> <span
+                  class="text-xs text-gray-600">Soporte multimedia para enviar datos críticos de producción.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">3.</span> <span
+                  class="text-xs text-gray-600">Respuestas rápidas al cliente entre distintas ubicaciones.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">4.</span> <span
+                  class="text-xs text-gray-600">Reducción de costos al utilizar redes públicas de
+                  telecomunicaciones.</span></li>
+            </ul>
+          </div>
+
+          <!-- Sector Emergencia -->
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all group">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-brand-gold/10 rounded-xl flex items-center justify-center group-hover:bg-brand-gold transition-colors duration-300">
+                <i class="ri-alarm-warning-line text-3xl text-brand-gold group-hover:text-brand-dark"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-brand-dark">Sector Emergencia</h3>
+            </div>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+              Combina las habilidades operacionales extremas con herramientas de oficina. Dispositivos ultrarresistentes
+              para situaciones donde cada segundo cuenta.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">1.</span> <span
+                  class="text-xs text-gray-600">Ideal si se combinan labores tácticas y administrativas.</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">2.</span> <span
+                  class="text-xs text-gray-600">Acceso a información en línea (hojas de ruta, bases de datos).</span>
+              </li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">3.</span> <span
+                  class="text-xs text-gray-600">Tranquilidad con equipos contra agua, polvo, caídas (Gorilla
+                  Glass).</span></li>
+              <li class="flex items-start gap-3"><span class="font-bold text-brand-gold">4.</span> <span
+                  class="text-xs text-gray-600">Llamadas Wi-Fi cuando la cobertura celular falla.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. COMPLEMENTO A RADIO CONVENCIONAL -->
+    <section class="py-24 bg-white border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="inline-block bg-brand-gold/10 px-4 py-2 rounded-full mb-6">
+          <span class="text-brand-gold font-bold text-sm tracking-widest uppercase">Escalabilidad</span>
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">¿PoC complementa las comunicaciones
+          profesionales?</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-10">
+          <strong>Sí.</strong> La tecnología PoC puede complementar los sistemas de radio convencional mejorando la
+          cobertura sin necesidad de infraestructura adicional, ampliando así el rango de operaciones de una empresa.
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Tanto los radios convencionales como los radios PoC de Goratrack están orientados a mejorar las comunicaciones
+          corporativas, a diferencia de los celulares comerciales que están dirigidos a comunicaciones personales no
+          encriptadas.
+        </p>
+        <div class="mt-12 text-center">
+          <a href="index.html"
+            class="bg-brand-dark text-brand-gold font-bold px-10 py-4 rounded-full hover:bg-brand-dark/90 transition-all duration-300 shadow-lg inline-block">
+            Solicitar demostración <i class="ri-arrow-right-line ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="lg:col-span-2">
+          <div class="inline-block bg-white p-2 rounded-md mb-5">
+            <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas"
+              class="h-10 w-auto object-contain" />
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+            GORATRACK Sistemas ofrece soluciones de tecnología satelital, rastreo GPS,
+            radiocomunicación encriptada y plataformas inteligentes de gestión operativa
+            para empresas que requieren control, trazabilidad y capacidad de respuesta en tiempo real.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Navegación</h5>
+          <ul class="space-y-3">
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Inicio</a></li>
+            <li><a href="rastreo-gps.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Rastreo GPS</a></li>
+            <li><a href="#"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Radiocomunicación</a>
+            </li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Soluciones</h5>
+          <ul class="space-y-3">
+            <li><a href="rastreo-gps.html" class="text-gray-400 text-sm hover:text-white transition-colors">Rastreo
+                GPS</a></li>
+            <li><a href="#" class="text-brand-gold text-sm transition-colors">Radiocomunicación</a></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Plataformas inteligentes</span></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Integración tecnológica</span></li>
+            <li><span class="text-gray-400 text-sm cursor-not-allowed">Analítica operativa</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-500 text-xs">&copy; 2026 GORATRACK Sistemas. Todos los derechos reservados.</p>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-500 text-xs">Tecnología satelital &bull; Rastreo GPS &bull; Radiocomunicación
+              encriptada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
