@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GORATRACK | Analítica Operativa — Inteligencia de Datos</title>
+
+  <meta name="description"
+    content="Inteligencia de datos y reportes automatizados. Sistema reporteador con IA para convertir miles de datos logísticos en reportes gerenciales objetivos." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png"
+    href="https://static.readdy.ai/image/fed6b371770be9defbe288b77a595288/68da367dfcc11d1102ec162196b95b68.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#11151C',
+              gold: '#DDA727',
+              goldHover: '#c9941f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Image Modal / Lightbox */
+    .img-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .img-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .img-modal-overlay img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      transform: scale(0.92);
+      transition: transform 0.35s ease;
+    }
+
+    .img-modal-overlay.active img {
+      transform: scale(1);
+    }
+
+    .img-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .img-modal-close:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .zoomable {
+      cursor: zoom-in;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .zoomable:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+  <!-- IMAGE MODAL -->
+  <div id="img-modal" class="img-modal-overlay" onclick="closeImgModal()">
+    <button class="img-modal-close" onclick="closeImgModal()" aria-label="Cerrar imagen">
+      <i class="ri-close-line"></i>
+    </button>
+    <img id="img-modal-src" src="" alt="Vista ampliada" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="index.html" class="flex items-center cursor-pointer">
+        <div class="bg-white p-1.5 rounded-md flex items-center justify-center">
+          <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas Logo"
+            class="h-8 w-auto object-contain" />
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Inicio
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Nosotros
+        </a>
+        <div class="relative group">
+          <button
+            class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-brand-gold flex items-center gap-1">
+            Soluciones <i class="ri-arrow-down-s-line"></i>
+            <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-gold rounded-full"></span>
+          </button>
+          <div
+            class="absolute left-0 mt-2 w-64 bg-brand-dark border border-white/10 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden flex flex-col z-50 py-2">
+            <a href="rastreo-gps.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Rastreo
+              GPS</a>
+            <a href="radiocomunicacion.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Radiocomunicación
+              encriptada</a>
+            <a href="plataformas-inteligentes.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Plataformas
+              inteligentes</a>
+            <a href="integracion-tecnologica.html"
+              class="px-4 py-2 text-sm text-gray-300 hover:text-brand-gold hover:bg-white/5 transition-colors">Integración
+              tecnológica</a>
+            <a href="analitica-operativa.html"
+              class="px-4 py-2 text-sm text-brand-gold hover:bg-white/5 transition-colors font-bold">Analítica
+              operativa</a>
+          </div>
+        </div>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Industrias
+        </a>
+        <a href="index.html"
+          class="relative text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap pb-1 text-gray-300 hover:text-white">
+          Contacto
+        </a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden md:flex items-center">
+        <a href="index.html"
+          class="bg-brand-gold text-brand-dark text-sm font-bold px-5 py-2.5 rounded-full hover:bg-brand-goldHover transition-colors duration-200 cursor-pointer whitespace-nowrap">
+          Solicitar cotización
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger -->
+      <button class="md:hidden text-white cursor-pointer"
+        onclick="document.getElementById('mobile-menu').classList.toggle('hidden'); document.getElementById('mobile-menu').classList.toggle('flex');"
+        aria-label="Toggle menu">
+        <i class="ri-menu-line text-2xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="hidden md:hidden bg-brand-dark border-t border-white/10 px-6 py-4 flex-col gap-4 overflow-y-auto max-h-screen">
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Inicio</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Nosotros</a>
+      <div class="flex flex-col gap-2">
+        <span class="text-left text-sm font-medium tracking-wide whitespace-nowrap text-brand-gold">Soluciones</span>
+        <div class="pl-4 flex flex-col gap-3 mt-1">
+          <a href="rastreo-gps.html" class="text-left text-sm text-gray-400 hover:text-brand-gold">Rastreo GPS</a>
+          <a href="radiocomunicacion.html"
+            class="text-left text-sm text-gray-400 hover:text-brand-gold">Radiocomunicación
+            encriptada</a>
+          <a href="plataformas-inteligentes.html"
+            class="text-left text-sm text-gray-400 hover:text-brand-gold">Plataformas inteligentes</a>
+          <a href="integracion-tecnologica.html"
+            class="text-left text-sm text-gray-400 hover:text-brand-gold">Integración tecnológica</a>
+          <a href="analitica-operativa.html" class="text-left text-sm font-bold text-brand-gold">Analítica
+            operativa</a>
+        </div>
+      </div>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Industrias</a>
+      <a href="index.html"
+        class="text-left text-sm font-medium tracking-wide cursor-pointer whitespace-nowrap text-gray-300">Contacto</a>
+    </div>
+  </header>
+
+  <main class="pt-16">
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative w-full h-screen overflow-hidden bg-black flex items-center">
+      <!-- Background Image -->
+      <div class="absolute inset-0 w-full h-full z-0 opacity-40 bg-cover bg-center"
+        style="background-image: url('http://imgfz.com/i/MZ2SNvB.png');"></div>
+
+      <!-- Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/80 to-transparent z-10"></div>
+
+      <!-- Content -->
+      <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-0.5 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Analítica Operativa</span>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+            Inteligencia de Datos y Reportes <span class="text-brand-gold">Automatizados</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+            Infraestructura digital para procesar miles de datos logísticos y convertirlos
+            en reportes gerenciales objetivos. Decisiones basadas en evidencia, no en suposiciones.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#modulo-1"
+              class="bg-brand-gold text-brand-dark font-bold px-8 py-4 rounded-full hover:bg-brand-goldHover transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+              Explorar módulos <i class="ri-arrow-down-line"></i>
+            </a>
+            <a href="index.html"
+              class="border-2 border-white text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
+              Solicitar cotización <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO: CONCEPTO DEL PROYECTO -->
+    <section class="py-20 bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <div class="flex items-center justify-center gap-3 mb-4">
+            <div class="w-8 h-0.5 bg-brand-gold"></div>
+            <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Proyecto Estratégico</span>
+            <div class="w-8 h-0.5 bg-brand-gold"></div>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-bold text-brand-dark mb-4">Sistema Reporteador IA para Datos
+            Críticos</h2>
+          <p class="text-gray-500 max-w-3xl mx-auto text-lg">
+            Una plataforma integral que captura, analiza y transforma datos operativos brutos en
+            inteligencia accionable para los tomadores de decisiones de su organización.
+          </p>
+        </div>
+
+        <!-- 3-Column Module Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-all duration-300 group text-center">
+            <div
+              class="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-3xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-robot-2-line"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Módulo 1</h3>
+            <p class="text-brand-gold font-semibold text-sm mb-3">Optimización con IA</p>
+            <p class="text-gray-500 text-sm">Interfaz de captura inteligente con asistencia de IA generativa.</p>
+          </div>
+          <div
+            class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-all duration-300 group text-center">
+            <div
+              class="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-3xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-bar-chart-grouped-line"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Módulo 2</h3>
+            <p class="text-brand-gold font-semibold text-sm mb-3">Dashboard de Inteligencia</p>
+            <p class="text-gray-500 text-sm">KPIs, mapas de calor y trazabilidad de activos en tiempo real.</p>
+          </div>
+          <div
+            class="bg-slate-50 p-8 rounded-2xl border border-slate-100 hover:shadow-xl transition-all duration-300 group text-center">
+            <div
+              class="w-16 h-16 bg-brand-gold/10 rounded-full flex items-center justify-center text-brand-gold text-3xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+              <i class="ri-file-pdf-2-line"></i>
+            </div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Módulo 3</h3>
+            <p class="text-brand-gold font-semibold text-sm mb-3">Motor de Reporteo PDF</p>
+            <p class="text-gray-500 text-sm">Documentación automática con formato corporativo y envío programado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. MÓDULO 1: OPTIMIZACIÓN CON IA -->
+    <section id="modulo-1" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2">
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold text-xl">
+                <i class="ri-robot-2-fill"></i>
+              </div>
+              <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Módulo 1</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">Optimización con Inteligencia
+              Artificial</h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              La interfaz de captura de reportes está potenciada con un Motor de IA Generativa que asiste
+              al operador en tiempo real. A partir de una nota operativa básica, el sistema reescribe
+              automáticamente el contenido en redacción ejecutiva y con rigor documental.
+            </p>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start gap-3">
+                <i class="ri-quill-pen-fill text-brand-gold text-xl mt-0.5"></i>
+                <div>
+                  <span class="text-brand-dark font-semibold">Redacción Ejecutiva Automática</span>
+                  <p class="text-gray-500 text-sm mt-1">El modelo de lenguaje transforma notas breves
+                    en párrafos profesionales con el tono y vocabulario adecuado para reportes gerenciales.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="ri-save-3-fill text-brand-gold text-xl mt-0.5"></i>
+                <div>
+                  <span class="text-brand-dark font-semibold">Smart Auto-Save Asíncrono</span>
+                  <p class="text-gray-500 text-sm mt-1">Cada campo se guarda automáticamente en segundo plano.
+                    No hay riesgo de pérdida de información, incluso ante cortes de conexión.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="ri-image-add-fill text-brand-gold text-xl mt-0.5"></i>
+                <div>
+                  <span class="text-brand-dark font-semibold">Captura Multimedia Integrada</span>
+                  <p class="text-gray-500 text-sm mt-1">Adjunte imágenes de evidencia directamente desde el
+                    navegador. El sistema las procesa, comprime y vincula al reporte de forma automática.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="lg:w-1/2">
+            <img src="http://imgfz.com/i/OxbfPJ3.png" alt="Interfaz de captura de reportes con IA"
+              class="w-full rounded-2xl shadow-xl border border-gray-100 zoomable" onclick="openImgModal(this)" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. MÓDULO 2: DASHBOARD DE INTELIGENCIA -->
+    <section class="py-24 bg-brand-dark text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col-reverse lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2">
+            <img src="http://imgfz.com/i/RzEUfec.png" alt="Dashboard de inteligencia con KPIs y mapas de calor"
+              class="w-full rounded-2xl shadow-2xl border border-white/10 zoomable" onclick="openImgModal(this)" />
+          </div>
+          <div class="lg:w-1/2">
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold text-xl">
+                <i class="ri-bar-chart-grouped-fill"></i>
+              </div>
+              <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Módulo 2</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Dashboard de Inteligencia</h2>
+            <p class="text-gray-400 mb-6 leading-relaxed">
+              Un centro de análisis que consolida todos los datos operativos en indicadores claros y
+              visualizaciones interactivas. Los gerentes y directores acceden a información procesada,
+              no a datos crudos.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                <i class="ri-pie-chart-2-fill text-brand-gold text-2xl mb-3 block"></i>
+                <h4 class="text-white font-semibold text-sm mb-1">KPIs en Tiempo Real</h4>
+                <p class="text-gray-500 text-xs">Índices de cumplimiento, tiempos de respuesta y métricas
+                  de rendimiento actualizados al segundo.</p>
+              </div>
+              <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                <i class="ri-fire-fill text-brand-gold text-2xl mb-3 block"></i>
+                <h4 class="text-white font-semibold text-sm mb-1">Mapas de Calor</h4>
+                <p class="text-gray-500 text-xs">Visualización geográfica de densidad de eventos,
+                  incidencias y actividad operativa por zona.</p>
+              </div>
+              <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                <i class="ri-route-fill text-brand-gold text-2xl mb-3 block"></i>
+                <h4 class="text-white font-semibold text-sm mb-1">Trazabilidad de Activos</h4>
+                <p class="text-gray-500 text-xs">Historial completo de movimientos, paradas y estados
+                  de cada unidad de la flota.</p>
+              </div>
+              <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                <i class="ri-line-chart-fill text-brand-gold text-2xl mb-3 block"></i>
+                <h4 class="text-white font-semibold text-sm mb-1">Tendencias Operativas</h4>
+                <p class="text-gray-500 text-xs">Análisis comparativo entre periodos para identificar
+                  mejoras, retrocesos y oportunidades.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MÓDULO 3: MOTOR DE REPORTEO PDF -->
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2">
+            <div class="flex items-center gap-3 mb-4">
+              <div
+                class="w-10 h-10 bg-brand-gold/10 rounded-lg flex items-center justify-center text-brand-gold text-xl">
+                <i class="ri-file-pdf-2-fill"></i>
+              </div>
+              <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Módulo 3</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">Motor de Reporteo PDF</h2>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+              Con un solo clic, toda la información operativa — notas del operador, redacción corregida por IA,
+              imágenes de evidencia y metadatos del evento — se compila automáticamente en un documento PDF
+              con formato corporativo profesional, listo para firma o archivo legal.
+            </p>
+            <p class="text-gray-600 mb-8 leading-relaxed">
+              El sistema permite configurar <strong>envíos programados</strong>: resúmenes diarios, semanales o
+              mensuales que se generan y entregan directamente a las bandejas de correo de los directivos,
+              sin intervención humana.
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-3 text-brand-dark font-medium">
+                <i class="ri-checkbox-circle-fill text-brand-gold text-xl"></i>
+                Formato corporativo personalizable
+              </li>
+              <li class="flex items-center gap-3 text-brand-dark font-medium">
+                <i class="ri-checkbox-circle-fill text-brand-gold text-xl"></i>
+                Envío programado a directivos
+              </li>
+              <li class="flex items-center gap-3 text-brand-dark font-medium">
+                <i class="ri-checkbox-circle-fill text-brand-gold text-xl"></i>
+                Integración de evidencia fotográfica
+              </li>
+              <li class="flex items-center gap-3 text-brand-dark font-medium">
+                <i class="ri-checkbox-circle-fill text-brand-gold text-xl"></i>
+                Archivo documental con trazabilidad
+              </li>
+            </ul>
+            <a href="index.html"
+              class="inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-bold px-6 py-3 rounded-full hover:bg-brand-goldHover transition-colors">
+              Solicitar demostración <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+          <div class="lg:w-1/2">
+            <img src="http://imgfz.com/i/LtpKVbF.png" alt="Motor de generación de reportes PDF"
+              class="w-full rounded-2xl shadow-xl border border-gray-100 zoomable" onclick="openImgModal(this)" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CIERRE DE VALOR: PROCESAMIENTO PREVENTIVO -->
+    <section class="py-24 bg-brand-dark text-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="bg-gradient-to-br from-[#1a1f2e] to-brand-dark rounded-3xl p-10 md:p-16 shadow-2xl border border-white/5">
+          <div class="flex flex-col lg:flex-row items-center gap-12">
+
+            <div class="lg:w-3/5">
+              <div class="flex items-center gap-3 mb-6">
+                <i class="ri-shield-flash-fill text-3xl text-brand-gold"></i>
+                <h2 class="text-3xl md:text-4xl font-black">Prevención Inteligente y Autónoma</h2>
+              </div>
+              <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                Nuestros motores de procesamiento programado analizan de forma continua y autónoma los
+                patrones de <strong class="text-white">velocidad, tiempos y movimientos</strong> de toda la flota.
+                Cuando se detecta una anomalía — exceso de velocidad recurrente, tiempos muertos
+                prolongados, desvíos de ruta no autorizados — el sistema genera y envía
+                <strong class="text-white">alertas preventivas directamente a los tomadores de decisiones</strong>,
+                completamente sin intervención humana.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white/5 p-5 rounded-xl border border-white/10 text-center">
+                  <i class="ri-speed-up-fill text-brand-gold text-3xl mb-3 block"></i>
+                  <h4 class="text-white font-bold text-sm mb-1">Patrones de Velocidad</h4>
+                  <p class="text-gray-500 text-xs">Detección de excesos recurrentes y zonas de riesgo.</p>
+                </div>
+                <div class="bg-white/5 p-5 rounded-xl border border-white/10 text-center">
+                  <i class="ri-timer-flash-fill text-brand-gold text-3xl mb-3 block"></i>
+                  <h4 class="text-white font-bold text-sm mb-1">Tiempos y Movimientos</h4>
+                  <p class="text-gray-500 text-xs">Control de ralentí, paradas y encendidos no autorizados.</p>
+                </div>
+                <div class="bg-white/5 p-5 rounded-xl border border-white/10 text-center">
+                  <i class="ri-mail-send-fill text-brand-gold text-3xl mb-3 block"></i>
+                  <h4 class="text-white font-bold text-sm mb-1">Alertas Autónomas</h4>
+                  <p class="text-gray-500 text-xs">Notificaciones directas a directivos sin intervención manual.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:w-2/5 flex items-center justify-center">
+              <div class="relative">
+                <div
+                  class="w-48 h-48 bg-brand-gold/10 rounded-full flex items-center justify-center border-2 border-brand-gold/30">
+                  <div
+                    class="w-32 h-32 bg-brand-gold/15 rounded-full flex items-center justify-center border border-brand-gold/40">
+                    <i class="ri-brain-fill text-6xl text-brand-gold"></i>
+                  </div>
+                </div>
+                <!-- Pulse rings -->
+                <div
+                  class="absolute inset-0 w-48 h-48 rounded-full border border-brand-gold/20 animate-ping opacity-20">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CTA FINAL -->
+    <section class="py-20 bg-slate-50 border-t border-gray-100">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-6">Convierta sus datos en decisiones</h2>
+        <p class="text-gray-500 text-lg mb-10">
+          La analítica operativa de GORATRACK transforma datos históricos en estrategias de prevención
+          y maximización del negocio. Hablemos de cómo implementarlo en su operación.
+        </p>
+        <a href="index.html"
+          class="bg-brand-gold text-brand-dark font-bold px-10 py-4 rounded-full hover:bg-brand-goldHover transition-all duration-300 shadow-lg inline-flex items-center gap-2">
+          Solicitar cotización <i class="ri-arrow-right-line"></i>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="lg:col-span-2">
+          <div class="inline-block bg-white p-2 rounded-md mb-5">
+            <img src="https://goratrack.tecuidamos.mx/img/logo.png" alt="GORATRACK Sistemas"
+              class="h-10 w-auto object-contain" />
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+            GORATRACK Sistemas ofrece soluciones de tecnología satelital, rastreo GPS,
+            radiocomunicación encriptada y plataformas inteligentes de gestión operativa
+            para empresas que requieren control, trazabilidad y capacidad de respuesta en tiempo real.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Navegación</h5>
+          <ul class="space-y-3">
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Inicio</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Nosotros</a></li>
+            <li><a href="#"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Soluciones</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Industrias</a></li>
+            <li><a href="index.html"
+                class="text-gray-400 text-sm hover:text-brand-gold transition-colors duration-200">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-bold text-sm uppercase tracking-wide mb-5">Soluciones</h5>
+          <ul class="space-y-3">
+            <li><a href="rastreo-gps.html" class="text-gray-400 text-sm hover:text-white transition-colors">Rastreo
+                GPS</a></li>
+            <li><a href="radiocomunicacion.html"
+                class="text-gray-400 text-sm hover:text-white transition-colors">Radiocomunicación</a></li>
+            <li><a href="plataformas-inteligentes.html"
+                class="text-gray-400 text-sm hover:text-white transition-colors">Plataformas inteligentes</a></li>
+            <li><a href="integracion-tecnologica.html"
+                class="text-gray-400 text-sm hover:text-white transition-colors">Integración tecnológica</a></li>
+            <li><a href="analitica-operativa.html" class="text-brand-gold text-sm transition-colors">Analítica
+                operativa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-gray-500 text-xs">&copy; 2026 GORATRACK Sistemas. Todos los derechos reservados.</p>
+          <div class="flex items-center gap-4">
+            <span class="text-gray-500 text-xs">Tecnología satelital &bull; Rastreo GPS &bull; Radiocomunicación
+              encriptada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Image Modal JS -->
+  <script>
+    function openImgModal(imgEl) {
+      const modal = document.getElementById('img-modal');
+      const modalImg = document.getElementById('img-modal-src');
+      modalImg.src = imgEl.src;
+      modalImg.alt = imgEl.alt;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImgModal() {
+      const modal = document.getElementById('img-modal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeImgModal();
+    });
+  </script>
+
+</body>
+
+</html>
