@@ -1,8 +1,60 @@
-Goratrack: Ecosistema de Gestión Telemática & Rastreo GPS 🛰️🛡️Plataforma centralizada de monitoreo satelital para seguridad operativa.Transformando datos de telemetría en inteligencia logística y protección de activos de alto valor.<div align="center"><img src="https://img.shields.io/badge/Plataforma-Gorat_Seguridad-1e293b?style=for-the-badge&logo=shield&logoColor=white" /><img src="https://img.shields.io/badge/Nicho-Fleet_Management-2563eb?style=for-the-badge&logo=google-maps&logoColor=white" /><img src="https://img.shields.io/badge/Estado-Critical_Ops-success?style=for-the-badge" /></div>🎯 Objetivo del ProyectoGoratrack es la solución propietaria diseñada para la gestión integral de flotas y unidades de seguridad. El sistema actúa como el concentrador primario de datos GPS, permitiendo a los operadores del Centro de Mando (C4) visualizar, auditar y reaccionar ante eventos en campo con precisión quirúrgica.Este desarrollo elimina la dependencia de interfaces de terceros, proporcionando un control total sobre la experiencia de monitoreo y la seguridad de la información.🚀 Funcionalidades Tácticas📍 1. Monitoreo en Tiempo Real (Real-Time Tracking)Visualización dinámica de unidades sobre cartografía avanzada.Actualización Latente: Refresco de posiciones mediante WebSockets para una visualización fluida.Telemetría Crítica: Monitoreo de estado de motor, velocidad, altitud y nivel de señal.🚧 2. Geocercas de Seguridad & LogísticaDefinición de perímetros virtuales para el control de rutas.Alertas de Cruce: Notificaciones instantáneas al entrar o salir de zonas restringidas o puntos de interés (POIs).Rutas Críticas: Trazado de trayectorias autorizadas con detección de desviaciones no programadas.📊 3. Inteligencia de Datos (BI Reports)Motor de generación de reportes para auditoría operativa.Logs Históricos: Almacenamiento y reproducción de recorridos históricos para análisis forense de incidentes.Análisis de Rendimiento: Reportes de ralentí, excesos de velocidad y tiempos de estancia.🚨 4. Gestión de Eventos & AlertasSistema de notificaciones jerarquizado para la toma de decisiones.Pánicos & Emergencias: Despliegue prioritario de alertas sonoras y visuales ante presiones de botón de pánico.Notificaciones Multi-canal: Integración con sistemas de mensajería para alertas operativas fuera de la plataforma.🛠️ Stack TecnológicoArquitectura diseñada para soportar concurrencia y despliegue en infraestructura robusta.CapaTecnologíaPropósitoBackendPHP 8.xLógica de procesamiento de tramas GPS y gestión de usuarios.FrontendTailwind CSS / Vanilla JSInterfaz moderna, ligera y optimizada para centros de monitoreo.Base de DatosMySQL / MariaDBAlmacenamiento de coordenadas y configuración de dispositivos.MapeoLeaflet JS / Google Maps APIRenderizado de capas cartográficas e interacción geoespacial.InfraestructuraLinux VPS / cPanelHosting de alta disponibilidad con optimización de recursos.🧭 Estructura del EcosistemaBash/goratrack
+Goratrack: Ecosistema de Gestión Telemática & Rastreo GPS 🛰️🛡️
+Plataforma centralizada de monitoreo satelital para seguridad operativa.
+Transformando datos de telemetría en inteligencia logística y protección de activos de alto valor.
+
+<div align="center">
+<img src="https://img.shields.io/badge/Plataforma-Gorat_Seguridad-1e293b?style=for-the-badge&logo=shield&logoColor=white" />
+<img src="https://img.shields.io/badge/Nicho-Fleet_Management-2563eb?style=for-the-badge&logo=google-maps&logoColor=white" />
+<img src="https://img.shields.io/badge/Estado-Critical_Ops-success?style=for-the-badge" />
+</div>
+🎯 Objetivo del Proyecto
+Goratrack es la solución propietaria diseñada para la gestión integral de flotas y unidades de seguridad. El sistema actúa como el concentrador primario de datos GPS, permitiendo a los operadores del Centro de Mando (C4) visualizar, auditar y reaccionar ante eventos en campo con precisión quirúrgica.
+
+Este desarrollo elimina la dependencia de interfaces de terceros, proporcionando un control total sobre la experiencia de monitoreo y la seguridad de la información.
+🚀 Funcionalidades Tácticas
+📍 1. Monitoreo en Tiempo Real (Real-Time Tracking)
+Visualización dinámica de unidades sobre cartografía avanzada.
+
+Actualización Latente: Refresco de posiciones mediante WebSockets para una visualización fluida.
+
+Telemetría Crítica: Monitoreo de estado de motor, velocidad, altitud y nivel de señal.
+
+🚧 2. Geocercas de Seguridad & Logística
+Definición de perímetros virtuales para el control de rutas.
+
+Alertas de Cruce: Notificaciones instantáneas al entrar o salir de zonas restringidas o puntos de interés (POIs).
+
+Rutas Críticas: Trazado de trayectorias autorizadas con detección de desviaciones no programadas.
+
+📊 3. Inteligencia de Datos (BI Reports)
+Motor de generación de reportes para auditoría operativa.
+
+Logs Históricos: Almacenamiento y reproducción de recorridos históricos para análisis forense de incidentes.
+
+Análisis de Rendimiento: Reportes de ralentí, excesos de velocidad y tiempos de estancia.
+
+🚨 4. Gestión de Eventos & Alertas
+Sistema de notificaciones jerarquizado para la toma de decisiones.
+
+Pánicos & Emergencias: Despliegue prioritario de alertas sonoras y visuales ante presiones de botón de pánico.
+
+Notificaciones Multi-canal: Integración con sistemas de mensajería para alertas operativas fuera de la plataforma.
+🛠️ Stack TecnológicoArquitectura diseñada para soportar concurrencia y despliegue en infraestructura robusta.CapaTecnologíaPropósitoBackendPHP 8.xLógica de procesamiento de tramas GPS y gestión de usuarios.FrontendTailwind CSS / Vanilla JSInterfaz moderna, ligera y optimizada para centros de monitoreo.Base de DatosMySQL / MariaDBAlmacenamiento de coordenadas y configuración de dispositivos.MapeoLeaflet JS / Google Maps APIRenderizado de capas cartográficas e interacción geoespacial.InfraestructuraLinux VPS / cPanelHosting de alta disponibilidad con optimización de recursos.
+
+🧭 Estructura del Ecosistema
+/goratrack
 ├── assets/             # Recursos visuales e iconografía de unidades
 ├── core/               # Lógica de conexión a base de datos y procesamiento
 ├── dashboard/          # Interfaz principal de monitoreo 24/7
 ├── api/                # Endpoints para integración con Herramientas C4
 ├── reports/            # Motor de generación de PDF y reportes históricos
 └── config/             # Configuración de servidores y protocolos GPS
-🔒 Seguridad y DisponibilidadComo plataforma de seguridad privada, Goratrack implementa capas de protección críticas:Control de Acceso (RBAC): Permisos diferenciados para monitoristas, supervisores y clientes.Protección de Datos: Cifrado de credenciales y sanitización estricta de entradas SQL.Optimización de Servidor: Configuración orientada a mitigar el consumo excesivo de CPU/RAM durante picos de tráfico de datos GPS.Desarrollado por:William Velázquez ValenzuelaDirector de Tecnologías | Arquitecto de Sistemas de Seguridad
+
+🔒 Seguridad y Disponibilidad
+Como plataforma de seguridad privada, Goratrack implementa capas de protección críticas:
+
+Control de Acceso (RBAC): Permisos diferenciados para monitoristas, supervisores y clientes.
+
+Protección de Datos: Cifrado de credenciales y sanitización estricta de entradas SQL.
+
+Optimización de Servidor: Configuración orientada a mitigar el consumo excesivo de CPU/RAM durante picos de tráfico de datos GPS.
