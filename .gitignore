@@ -1,2 +1,22 @@
-sftp.json
+# VS Code & Herramientas de desarrollo
 .vscode/
+sftp.json
+*.code-workspace
+
+# Variables de entorno y secretos
+.env*
+!.env.example
+deploy_secrets.local
+*.key
+*.pem
+
+# Archivos de base de datos
+*.sql
+
+# Documentos temporales y planes de implementación
+contexto*.md
+implementation_plan*.md
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

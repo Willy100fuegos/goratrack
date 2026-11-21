@@ -43,27 +43,29 @@ Sistema de notificaciones jerarquizado para la toma de decisiones.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Naturaleza del Proyecto & Stack Tecnológico
 
-Arquitectura diseñada para soportar concurrencia y despliegue en infraestructura robusta.
+Este repositorio corresponde al **sitio web estático corporativo y comercial** (Landing Pages) de GoraTrack. No requiere compiladores, builders ni backend activo para su previsualización o ejecución; se puede abrir directamente en cualquier navegador o servir desde cualquier servidor web estático (Nginx, Apache, cPanel/public_html, GitHub Pages, etc.).
 
 | Capa | Tecnología | Propósito |
 | :--- | :--- | :--- |
-| **Backend** | **PHP 8.x** | Lógica de procesamiento de tramas GPS y gestión de usuarios. |
-| **Frontend** | **Tailwind CSS / Vanilla JS** | Interfaz moderna, ligera y optimizada para centros de monitoreo. |
-| **Base de Datos** | **MySQL / MariaDB** | Almacenamiento de coordenadas y configuración de dispositivos. |
-| **Mapeo** | **Leaflet JS / Google Maps API** | Renderizado de capas cartográficas e interacción geoespacial. |
-| **Infraestructura** | **Linux VPS / cPanel** | Hosting de alta disponibilidad con optimización de recursos. |
+| **Estructura** | **HTML5 Semántico** | Maquetación web estática multi-página. |
+| **Estilos** | **Tailwind CSS / CSS Moderno** | Diseño responsivo y paleta corporativa de alta legibilidad. |
+| **Interactividad** | **Vanilla JavaScript** | Manejo de menús móviles, modales interactivos y eventos de teclado. |
+| **Infraestructura** | **Hosting Web Estático / Linux VPS / cPanel** | Distribución estática de alta disponibilidad. |
 
 ---
 
-## 🧭 Estructura del Ecosistema
+## 🧭 Estructura del Repositorio
 
 ```bash
 /goratrack
-├── assets/             # Recursos visuales e iconografía de unidades
-├── core/               # Lógica de conexión a base de datos y procesamiento
-├── dashboard/          # Interfaz principal de monitoreo 24/7
-├── api/                # Endpoints para integración con Herramientas C4
-├── reports/            # Motor de generación de PDF y reportes históricos
-└── config/             # Configuración de servidores y protocolos GPS
+├── index.html                   # Portada principal del ecosistema
+├── analitica-operativa.html     # Módulo de analítica y telemetría operativa
+├── integracion-tecnologica.html # Módulo de integración técnica de dispositivos
+├── plataformas-inteligentes.html # Módulo de soluciones y plataformas inteligentes
+├── radiocomunicacion.html       # Módulo de enlaces de comunicación crítica
+├── rastreo-gps.html             # Módulo de geolocalización y rastreo vehicular
+├── link.html                    # Concentrador de accesos y enlaces directos
+└── README.md                    # Documentación del proyecto
+```
